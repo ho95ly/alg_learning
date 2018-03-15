@@ -19,6 +19,7 @@ def give_change(coin_list, price, give_money):
             coin = coin_list_sr[i]
         num = round(exsist_money // coin, 0)
         residue = round(exsist_money % coin, 2)
+        # residue = float("%.2f" % (exsist_money % coin))
         coin_num.append((coin, num))
         exsist_money = residue
         i = i+1
