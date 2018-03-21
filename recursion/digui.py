@@ -36,8 +36,6 @@ def hanoi(n, a, b, c):
         hanoi(n-1, b, a, c)
 
 
-
-
 if __name__ == '__main__':
     a = hanoi(3, 'a', 'b', 'c')
     print(a)
