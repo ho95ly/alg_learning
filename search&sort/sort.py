@@ -4,7 +4,6 @@ __author__ = 'h0ly95'
 import numpy as np
 import time
 
-start = time.time()
 
 def bubbleSort(arr):
     length = len(arr)
@@ -33,6 +32,96 @@ def bubbleSort2(arr):
     return arr
 
 
+def bubbleSort3(arr):
+    length = len(arr)
+    low = 0
+    high = length-1
+    while low < high:
+        for i in range(low, high):
+            if arr[i] > arr[i + 1]:
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+        high = high - 1
+        for i in range(high, low, -1):
+            if arr[i] < arr[i - 1]:
+                tmp = arr[i]
+                arr[i] = arr[i - 1]
+                arr[i - 1] = tmp
+        low = low + 1
+
+    return arr
+
+
+def selectionSort(arr):
+    length = len(arr)
+    for i in range(length-1):
+        minIndex = i
+        for j in range(i+1, length):
+            if arr[j] < arr[minIndex]:
+                minIndex = j
+        tmp = arr[i]
+        arr[i] = arr[minIndex]
+        arr[minIndex] = tmp
+    return arr
+
+
+def insertionSort(arr):
+    length = len(arr)
+    for i in range(length):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j+1] = arr[j]
+            j = j-1
+        arr[j+1] = key
+    return arr
+
+
+def binaryInsertionSort(arr):
+    length = len(arr)
+    for i in range(length):
+        key = arr[i]
+        left = 0
+        right = i-1
+        while left < right:
+            middle = int((left + right)/2)
+            if key < arr[middle]:
+                right = middle - 1
+            else:
+                left = middle + 1
+        for j in range(i-1, left-1, -1):
+            arr[j + 1] = arr[j]
+        arr[left] = key
+    return arr
+
+
+def shellSort(arr, delta_list):
+    length = len(arr)
+    for gap in delta_list:
+        for i in range(gap, length):
+            tmp = arr[i]
+            j = i - gap
+            while j >= 0 and arr[j] > tmp:
+                arr[j+gap] = arr[j]
+                j = j - gap
+            arr[j+gap] = tmp
+    return arr
+
+
+def quickSort(arr, left, right):
+    if left < right:
+        x = arr[right]
+        i = left - 1
+        for j in range(left, right+1):
+            if arr[j] <= x:
+                i = i+1
+                tmp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = tmp
+        quickSort(arr, left, i-1)
+        quickSort(arr, i+1, right)
+    return arr
 
 def merge(a, b):
     c = list()
@@ -69,9 +158,9 @@ def mergeSort(list):
 
 
 if __name__ == '__main__':
-    a = np.random.rand(10)
+    a = np.random.rand(15)
     start = time.time()
-    b = bubbleSort2(a)
+    b = quickSort(a, 0, len(a)-1)
     end = time.time()
     print(str(end - start))
     #print(aa)
