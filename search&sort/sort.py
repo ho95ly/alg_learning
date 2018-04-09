@@ -2,6 +2,36 @@
 __author__ = 'h0ly95'
 
 import numpy as np
+import time
+
+start = time.time()
+
+def bubbleSort(arr):
+    length = len(arr)
+    for j in range(length):
+        for i in range(length-1-j):
+            if arr[i] > arr[i+1]:
+                tmp = arr[i]
+                arr[i] = arr[i+1]
+                arr[i+1] = tmp
+    return arr
+
+
+def bubbleSort2(arr):
+    length = len(arr)
+    j = length-1
+    while j > 0:
+        pos = 0
+        for i in range(j):
+            if arr[i] > arr[i + 1]:
+                pos = i
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+        j = pos
+
+    return arr
+
 
 
 def merge(a, b):
@@ -39,6 +69,10 @@ def mergeSort(list):
 
 
 if __name__ == '__main__':
-    k = [4, 8, 3, 7, 1, 5, 6]
-    p = mergeSort(k)
-    print(p)
+    a = np.random.rand(10)
+    start = time.time()
+    b = bubbleSort2(a)
+    end = time.time()
+    print(str(end - start))
+    #print(aa)
+    print(b)
